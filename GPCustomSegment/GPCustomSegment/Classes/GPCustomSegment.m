@@ -10,7 +10,7 @@
 
 static const CGFloat kCustomSegmentHeightMultiplier = 0.8f;
 static const CGFloat kCustomSegmentWidthMultiplier = 2.0f;
-static const NSTimeInterval kAnimationDuration = 0.4f;
+static const NSTimeInterval kAnimationDuration = 0.3f;
 
 @interface GPCustomSegment ()
 {
@@ -63,7 +63,7 @@ static const NSTimeInterval kAnimationDuration = 0.4f;
     }
     [self initElements];
     [self setupImagesArray:images];
-    self.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    self.frame = CGRectMake(frame.origin.x,frame.origin.y, frame.size.width, frame.size.height);
     return self;
 }
 
