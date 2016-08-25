@@ -8,7 +8,7 @@ it, simply add the following line to your Podfile:
 pod "GPCustomSegment"
 ```
 ## Example and Usage
-![ScreenShot](https://raw.githubusercontent.com/gprokopchuk/Screenshots/master/gpcustomsegment.png)
+![](https://raw.githubusercontent.com/gprokopchuk/Screenshots/master/customSegment.gif)
 
   
 ```objective-c
