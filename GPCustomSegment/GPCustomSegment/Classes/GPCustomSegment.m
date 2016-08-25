@@ -10,7 +10,7 @@
 
 static const CGFloat kCustomSegmentHeightMultiplier = 0.8f;
 static const CGFloat kCustomSegmentWidthMultiplier = 2.0f;
-static const NSTimeInterval kAnimationDuration = 0.1f;
+static const NSTimeInterval kAnimationDuration = 0.4f;
 
 @interface GPCustomSegment ()
 {
@@ -240,9 +240,9 @@ static const NSTimeInterval kAnimationDuration = 0.1f;
 - (void)layoutMasks
 {
     self.maskLayer.frame = self.selectedImageViewContainer.bounds;
-    self.pressureViewShowLayer.bounds = [self thumbRect];
+    self.pressureViewShowLayer.bounds = [self pressureRect];
     self.pressureViewShowLayer.center = [self centerForSegmentAtIndex:self.selectedSegmentIndex];
-    self.pressureViewShowLayer.layer.cornerRadius = CGRectGetHeight([self thumbRect]) / 2.0f;
+    self.pressureViewShowLayer.layer.cornerRadius = CGRectGetHeight([self pressureRect]) / 2.0f;
 }
 
 - (void)setupImagesArray:(NSArray *)images
@@ -277,9 +277,9 @@ static const NSTimeInterval kAnimationDuration = 0.1f;
 
 - (void)layoutPressureView
 {
-    self.pressureView.bounds = [self thumbRect];
+    self.pressureView.bounds = [self pressureRect];
     self.pressureView.center = [self centerForSegmentAtIndex:self.selectedSegmentIndex];
-    self.pressureView.layer.cornerRadius = CGRectGetHeight([self thumbRect]) / 2.0f;
+    self.pressureView.layer.cornerRadius = CGRectGetHeight([self pressureRect]) / 2.0f;
 }
 
 - (CGRect)rectForImageViewAtIndex:(NSUInteger)index withSegmentWidth:(CGFloat)segmentWidth boundingRect:(CGRect)boundingRect
@@ -399,7 +399,7 @@ static const NSTimeInterval kAnimationDuration = 0.1f;
     return imageView;
 }
 
-- (CGRect)thumbRect
+- (CGRect)pressureRect
 {
     CGFloat width;
     if ([self imagesCount] > 0)
@@ -423,13 +423,16 @@ static const NSTimeInterval kAnimationDuration = 0.1f;
     CGPoint newCenter = [self centerForSegmentAtIndex:index];
     if (animated)
     {
-        CABasicAnimation *basicAnimation = [self pressureViewAnimationWithFromCenter:self.pressureView.center toCenter:newCenter];
-        [self.pressureView.layer addAnimation:basicAnimation forKey:@"basic"];
-        self.pressureView.layer.position = newCenter;
-        
-        CABasicAnimation *positionAnimation = [self pressureViewAnimationWithFromCenter:self.pressureViewShowLayer.center toCenter:newCenter];
-        [self.pressureViewShowLayer.layer addAnimation:positionAnimation forKey:@"position"];
-        self.pressureViewShowLayer.layer.position = newCenter;
+        if (![self.pressureView.layer animationForKey:@"basic"])
+        {
+            CABasicAnimation *basicAnimation = [self pressureViewAnimationWithFromCenter:self.pressureView.center toCenter:newCenter];
+            [self.pressureView.layer addAnimation:basicAnimation forKey:@"basic"];
+            self.pressureView.layer.position = newCenter;
+            
+            CABasicAnimation *positionAnimation = [self pressureViewAnimationWithFromCenter:self.pressureViewShowLayer.center toCenter:newCenter];
+            [self.pressureViewShowLayer.layer addAnimation:positionAnimation forKey:@"position"];
+            self.pressureViewShowLayer.layer.position = newCenter;
+        }
     }
     else
     {
@@ -444,6 +447,7 @@ static const NSTimeInterval kAnimationDuration = 0.1f;
     animation.toValue = [NSValue valueWithCGPoint:toCenter];
     animation.duration = kAnimationDuration;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animation.delegate = self;
     return animation;
 }
 
@@ -475,5 +479,10 @@ static const NSTimeInterval kAnimationDuration = 0.1f;
     }
 }
 
+-(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    [self.pressureView.layer removeAllAnimations];
+    [self.pressureViewShowLayer.layer removeAllAnimations];
+}
 
 @end
