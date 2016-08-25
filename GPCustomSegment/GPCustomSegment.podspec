@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = 'Nice segment with images. Just use.'
-  s.homepage         = 'https://github.com/gprokopchuk'
+  s.homepage         = 'https://github.com/gprokopchuk/GPCustomSegment'
   s.screenshots      = 'https://raw.githubusercontent.com/gprokopchuk/Screenshots/master/gpcustomsegment.png'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'George Prokopchuk' => 'prokopchukgeorge@icloud.com' }
