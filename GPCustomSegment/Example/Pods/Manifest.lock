@@ -1,0 +1,16 @@
+PODS:
+  - GPCustomSegment (0.1.0)
+
+DEPENDENCIES:
+  - GPCustomSegment (from `../`)
+
+EXTERNAL SOURCES:
+  GPCustomSegment:
+    :path: ../
+
+SPEC CHECKSUMS:
+  GPCustomSegment: 270f5e90aaef14c1fb4ba17f0b76ff2785280961
+
+PODFILE CHECKSUM: 71442a989cc255eef62b185c3832ba890cd4be69
+
+COCOAPODS: 1.0.0

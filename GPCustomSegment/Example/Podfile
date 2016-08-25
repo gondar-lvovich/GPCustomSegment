@@ -1,0 +1,6 @@
+use_frameworks!
+target 'GPCustomSegment_Tests' do
+  pod 'GPCustomSegment', :path => '../'
+  
+  
+end
