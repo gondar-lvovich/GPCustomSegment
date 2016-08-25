@@ -17,9 +17,9 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = 'Nice segment with images'
+  s.description      = 'Nice segment with images. Just use.'
   s.homepage         = 'https://github.com/gprokopchuk'
-  s.screenshots      = 'https://github.com/gprokopchuk/Screenshots/blob/master/gpcustomsegment.png'
+  s.screenshots      = 'https://raw.githubusercontent.com/gprokopchuk/Screenshots/master/gpcustomsegment.png'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'George Prokopchuk' => 'prokopchukgeorge@icloud.com' }
   s.source           = { :git => 'https://github.com/gprokopchuk/GPCustomSegment.git', :tag => s.version.to_s }
@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'GPCustomSegment/Classes/**/*'
+  s.source_files = 'GPCustomSegment/Classes/*'
   
   # s.resource_bundles = {
   #   'GPCustomSegment' => ['GPCustomSegment/Assets/*.png']
